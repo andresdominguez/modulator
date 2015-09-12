@@ -3,7 +3,8 @@ package com.google.modulator;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.lang.javascript.JavascriptLanguage;
-import com.intellij.lang.javascript.psi.JSReferenceExpression;
+import com.intellij.lang.javascript.psi.JSCallExpression;
+import com.intellij.lang.javascript.psi.JSLiteralExpression;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
@@ -12,10 +13,9 @@ public class ModuleContributor extends CompletionContributor {
   public ModuleContributor() {
     super();
 
-
     PsiElementPattern.Capture<PsiElement> pattern =
         PlatformPatterns.psiElement()
-            .withParent(PlatformPatterns.psiElement(JSReferenceExpression.class))
+            .withParent(PlatformPatterns.psiElement(JSLiteralExpression.class))
             .withLanguage(JavascriptLanguage.INSTANCE);
 
     ModuleCompletionProvider completionProvider = new ModuleCompletionProvider();
