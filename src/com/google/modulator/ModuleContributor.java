@@ -1,0 +1,25 @@
+package com.google.modulator;
+
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.lang.javascript.JavascriptLanguage;
+import com.intellij.lang.javascript.psi.JSReferenceExpression;
+import com.intellij.patterns.PlatformPatterns;
+import com.intellij.patterns.PsiElementPattern;
+import com.intellij.psi.PsiElement;
+
+public class ModuleContributor extends CompletionContributor {
+  public ModuleContributor() {
+    super();
+
+
+    PsiElementPattern.Capture<PsiElement> pattern =
+        PlatformPatterns.psiElement()
+            .withParent(PlatformPatterns.psiElement(JSReferenceExpression.class))
+            .withLanguage(JavascriptLanguage.INSTANCE);
+
+    ModuleCompletionProvider completionProvider = new ModuleCompletionProvider();
+
+    extend(CompletionType.BASIC, pattern, completionProvider);
+  }
+}
