@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> {
+class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
   protected void addCompletions(CompletionParameters completionParameters, ProcessingContext processingContext, CompletionResultSet completionResultSet) {
 
@@ -35,7 +35,7 @@ public class ModuleCompletionProvider extends CompletionProvider<CompletionParam
   private Iterable<? extends LookupElement> getCompletions(Project project) {
     List<LookupElement> lookups = new ArrayList<LookupElement>();
 
-    ModuleFinder moduleFinder = new ModuleFinder("src", project);
+    ModuleFinder moduleFinder = new ModuleFinder(project);
     for (String module : moduleFinder.findModules()) {
       lookups.add(getLookupElement(module));
     }
