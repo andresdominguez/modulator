@@ -6,6 +6,7 @@ import com.intellij.codeInsight.lookup.AutoCompletionPolicy;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -32,5 +33,10 @@ public abstract class CompletionHelper extends CompletionProvider<CompletionPara
     }
 
     return lookups;
+  }
+
+  public static boolean isInvalidFile(VirtualFile file) {
+    String name = file.getName();
+    return name.startsWith(".") || file.isDirectory() || !name.endsWith(".js");
   }
 }
