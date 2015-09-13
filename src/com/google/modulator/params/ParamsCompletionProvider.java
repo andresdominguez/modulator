@@ -1,5 +1,7 @@
 package com.google.modulator.params;
 
+import com.google.modulator.config.CompletionStrategy;
+import com.google.modulator.config.ModulatorSettings;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
@@ -9,9 +11,21 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.modulator.CompletionHelper.addCompletionsFromStringList;
 import static com.google.modulator.CompletionHelper.getCompletions;
 
 class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
+
+  private final ModulatorSettings settings;
+
+  public ParamsCompletionProvider() {
+    settings = new ModulatorSettings();
+  }
+
   @Override
   protected void addCompletions(@NotNull CompletionParameters completionParameters,
                                 ProcessingContext processingContext,
@@ -22,10 +36,16 @@ class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> 
       return;
     }
 
+    // Should I complete from a file?
+    if (settings.getStrategy() == CompletionStrategy.FILE) {
+      addCompletionsFromStringList(completionResultSet, readAutoCompleteFile());
+      return;
+    }
+
     ServiceFinder serviceFinder = new ServiceFinder(originalPosition.getProject());
     Iterable<String> services = serviceFinder.findServices();
 
-    completionResultSet.addAllElements(getCompletions(services));
+    addCompletionsFromStringList(completionResultSet, services);
   }
 
   // Check if this is a function(<caret>) element
@@ -34,5 +54,23 @@ class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> 
     PsiElement grandParent = parent.getParent();
 
     return parent instanceof JSParameterList && grandParent instanceof JSFunctionExpression;
+  }
+
+  private Iterable<String> readAutoCompleteFile() {
+    String filePath = settings.getFilePath();
+
+    try {
+      List<String> lines = new ArrayList<String>();
+
+      BufferedReader reader = new BufferedReader(new FileReader(filePath));
+      String line;
+      while ((line = reader.readLine()) != null) {
+        lines.add(line);
+      }
+
+      return lines;
+    } catch (IOException e) {
+      throw new RuntimeException("Error reading file " + filePath, e);
+    }
   }
 }
