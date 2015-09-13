@@ -38,6 +38,17 @@ public class ConfigForm {
 
   public void setCompletionStrategy(CompletionStrategy strategy) {
     this.completionStrategy = strategy;
+    switch (strategy) {
+      case SEARCH:
+        searchFilesRadioButton.setSelected(true);
+        break;
+      case FILE:
+        searchFilesRadioButton.setSelected(true);
+        break;
+      case BOTH:
+        bothRadioButton.setSelected(true);
+        break;
+    }
 
     // Switch visibility
     filePanel.setVisible(this.completionStrategy != CompletionStrategy.SEARCH);
