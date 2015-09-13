@@ -1,4 +1,4 @@
-package com.google.modulator;
+package com.google.modulator.modules;
 
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;

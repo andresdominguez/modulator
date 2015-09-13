@@ -1,4 +1,4 @@
-package com.google.modulator;
+package com.google.modulator.modules;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
