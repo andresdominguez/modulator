@@ -19,6 +19,10 @@ public class Finder<T> {
     this.visitor = visitor;
   }
 
+  /**
+   * Visit all the project files and use the visitor to process them.
+   * @return A list of matches.
+   */
   public Iterable<T> find() {
     final List<T> list = new ArrayList<T>();
 
