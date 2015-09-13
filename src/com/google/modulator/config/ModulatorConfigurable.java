@@ -29,6 +29,7 @@ public class ModulatorConfigurable implements Configurable {
     if (view == null) {
       view = new ConfigForm();
     }
+    view.setCompletionStrategy(CompletionStrategy.FILE);
 
     return view.getMainPanel();
 
