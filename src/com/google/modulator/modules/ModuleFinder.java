@@ -1,5 +1,6 @@
 package com.google.modulator.modules;
 
+import com.google.modulator.CompletionHelper;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
@@ -32,8 +33,7 @@ class ModuleFinder {
       public boolean processFile(VirtualFile file) {
 
         // Skip hidden files, dirs, and non-js files.
-        String name = file.getName();
-        if (name.startsWith(".") || file.isDirectory() || !name.endsWith(".js")) {
+        if (CompletionHelper.isInvalidFile(file)) {
           return true;
         }
 
