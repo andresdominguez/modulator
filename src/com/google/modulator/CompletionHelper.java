@@ -1,7 +1,5 @@
 package com.google.modulator;
 
-import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.AutoCompletionPolicy;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -12,7 +10,7 @@ import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class CompletionHelper extends CompletionProvider<CompletionParameters> {
+public class CompletionHelper {
 
   public static void addCompletionsFromStringList(
       @NotNull CompletionResultSet completionResultSet,
@@ -27,13 +25,18 @@ public abstract class CompletionHelper extends CompletionProvider<CompletionPara
   }
 
   @NotNull
-  static LookupElement getLookupElement(String completionString) {
+  public static LookupElement getLookupElement(String completionString) {
+    return getLookupElement(completionString, completionString);
+  }
+
+  @NotNull
+  public static LookupElement getLookupElement(String completionString, String presentableText) {
     // TODO: find a better icon.
     return LookupElementBuilder
         .create(completionString)
         .withBoldness(true)
         .withIcon(AllIcons.FileTypes.JavaScript)
-        .withPresentableText(completionString)
+        .withPresentableText(presentableText)
         .withCaseSensitivity(true)
         .withAutoCompletionPolicy(AutoCompletionPolicy.GIVE_CHANCE_TO_OVERWRITE);
   }
