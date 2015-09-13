@@ -1,13 +1,16 @@
 package com.google.modulator.modules;
 
+import com.google.modulator.CompletionHelper;
+import com.google.modulator.Finder;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.lookup.AutoCompletionPolicy;
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
-
-import static com.google.modulator.CompletionHelper.addCompletionsFromStringList;
 
 class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
@@ -25,7 +28,14 @@ class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> 
       return;
     }
 
-    ModuleFinder moduleFinder = new ModuleFinder(originalPosition.getProject());
-    addCompletionsFromStringList(completionResultSet, moduleFinder.findModules());
+    Finder<ModuleResult> moduleFinder = new Finder<ModuleResult>(originalPosition.getProject(), new ModuleVisitor());
+    for (ModuleResult moduleResult : moduleFinder.find()) {
+      LookupElement lookupElement = CompletionHelper.newBuilder(moduleResult.name)
+          .withPresentableText(String.format("%s (%s)", moduleResult.name, moduleResult.file.getName()))
+          .withIcon(AllIcons.FileTypes.JavaScript)
+          .withAutoCompletionPolicy(AutoCompletionPolicy.GIVE_CHANCE_TO_OVERWRITE);
+
+      completionResultSet.addElement(lookupElement);
+    }
   }
 }

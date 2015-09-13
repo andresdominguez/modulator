@@ -26,19 +26,26 @@ public class CompletionHelper {
 
   @NotNull
   public static LookupElement getLookupElement(String completionString) {
-    return getLookupElement(completionString, completionString);
+    return newBuilder(completionString)
+        .withPresentableText(completionString)
+        .withAutoCompletionPolicy(AutoCompletionPolicy.GIVE_CHANCE_TO_OVERWRITE);
   }
 
   @NotNull
   public static LookupElement getLookupElement(String completionString, String presentableText) {
     // TODO: find a better icon.
+    return newBuilder(completionString)
+        .withPresentableText(presentableText)
+        .withAutoCompletionPolicy(AutoCompletionPolicy.GIVE_CHANCE_TO_OVERWRITE);
+  }
+
+  @NotNull
+  public static LookupElementBuilder newBuilder(String completionString) {
     return LookupElementBuilder
         .create(completionString)
         .withBoldness(true)
         .withIcon(AllIcons.FileTypes.JavaScript)
-        .withPresentableText(presentableText)
-        .withCaseSensitivity(true)
-        .withAutoCompletionPolicy(AutoCompletionPolicy.GIVE_CHANCE_TO_OVERWRITE);
+        .withCaseSensitivity(true);
   }
 
   public static boolean isInvalidFile(VirtualFile file) {
