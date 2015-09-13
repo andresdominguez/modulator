@@ -1,5 +1,6 @@
 package com.google.modulator.params;
 
+import com.google.modulator.Finder;
 import com.google.modulator.config.CompletionStrategy;
 import com.google.modulator.config.ModulatorSettings;
 import com.intellij.codeInsight.completion.CompletionParameters;
@@ -15,12 +16,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.modulator.CompletionHelper.addCompletionsFromStringList;
+import static com.google.modulator.config.CompletionStrategy.BOTH;
+import static com.google.modulator.config.CompletionStrategy.FILE;
+import static com.google.modulator.config.CompletionStrategy.SEARCH;
 
 class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
 
+  public static final String LINE_SEPARATOR = System.getProperty("line.separator");
   private final ModulatorSettings settings;
 
   public ParamsCompletionProvider() {
@@ -38,15 +44,18 @@ class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> 
     }
 
     // Should I complete from a file?
-    if (settings.getStrategy() == CompletionStrategy.FILE) {
+    CompletionStrategy strategy = settings.getStrategy();
+    if (strategy != SEARCH) {
       addCompletionsFromStringList(completionResultSet, readAutoCompleteFile());
-      return;
     }
 
-    ServiceFinder serviceFinder = new ServiceFinder(originalPosition.getProject());
-    Iterable<String> services = serviceFinder.findServices();
+    // Should I search the files?
+    if (strategy != FILE) {
+      addCompletionsFromStringList(completionResultSet, searchFilesForModules(originalPosition));
+    }
 
-    addCompletionsFromStringList(completionResultSet, services);
+    // Add extra complete tokens
+    addCompletionsFromStringList(completionResultSet, readExtraTokens());
   }
 
   // Check if this is a function(<caret>) element
@@ -73,5 +82,15 @@ class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> 
     } catch (IOException e) {
       throw new RuntimeException("Error reading file " + filePath, e);
     }
+  }
+
+  private Iterable<String> searchFilesForModules(PsiElement originalPosition) {
+    Finder<String> serviceFinder = new Finder<String>(originalPosition.getProject(), new ServiceVisitor());
+    return serviceFinder.find();
+  }
+
+  @NotNull
+  private List<String> readExtraTokens() {
+    return Arrays.asList(settings.getCompleteTokens().split(LINE_SEPARATOR));
   }
 }

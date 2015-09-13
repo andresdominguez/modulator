@@ -47,4 +47,8 @@ public abstract class CompletionHelper extends CompletionProvider<CompletionPara
     String name = file.getName();
     return name.startsWith(".") || file.isDirectory() || !name.endsWith(".js");
   }
+
+  public static boolean isValidFile(VirtualFile file) {
+    return !isInvalidFile(file);
+  }
 }
