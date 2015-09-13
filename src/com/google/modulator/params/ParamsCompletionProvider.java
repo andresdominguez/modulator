@@ -11,12 +11,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.modulator.CompletionHelper.addCompletionsFromStringList;
-import static com.google.modulator.CompletionHelper.getCompletions;
 
 class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
 

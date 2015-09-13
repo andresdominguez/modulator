@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
-import static com.google.modulator.CompletionHelper.getCompletions;
+import static com.google.modulator.CompletionHelper.addCompletionsFromStringList;
 
 class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
@@ -25,7 +25,7 @@ class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> 
       return;
     }
 
-    final ModuleFinder moduleFinder = new ModuleFinder(originalPosition.getProject());
-    completionResultSet.addAllElements(getCompletions(moduleFinder.findModules()));
+    ModuleFinder moduleFinder = new ModuleFinder(originalPosition.getProject());
+    addCompletionsFromStringList(completionResultSet, moduleFinder.findModules());
   }
 }
