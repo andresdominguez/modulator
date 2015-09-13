@@ -36,6 +36,9 @@ public class ModulatorConfigurable implements Configurable {
     }
     view.setCompletionStrategy(CompletionStrategy.FILE);
 
+    // Load the setting into the view.
+    reset();
+
     return view.getMainPanel();
   }
 
