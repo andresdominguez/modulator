@@ -8,27 +8,22 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.Function;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class CompletionHelper extends CompletionProvider<CompletionParameters> {
 
   public static void addCompletionsFromStringList(
       @NotNull CompletionResultSet completionResultSet,
       Iterable<String> completions) {
-    completionResultSet.addAllElements(getCompletions(completions));
-  }
 
-  public static Iterable<? extends LookupElement> getCompletions(Iterable<String> completions) {
-    List<LookupElement> lookups = new ArrayList<LookupElement>();
-
-    for (String module : completions) {
-      lookups.add(getLookupElement(module));
-    }
-
-    return lookups;
+    completionResultSet.addAllElements(ContainerUtil.map(completions, new Function<String, LookupElement>() {
+      @Override
+      public LookupElement fun(String completion) {
+        return getLookupElement(completion);
+      }
+    }));
   }
 
   @NotNull
