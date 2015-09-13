@@ -32,7 +32,6 @@ public class ModulatorConfigurable implements Configurable {
     view.setCompletionStrategy(CompletionStrategy.FILE);
 
     return view.getMainPanel();
-
   }
 
   @Override
