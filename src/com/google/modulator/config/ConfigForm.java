@@ -43,7 +43,7 @@ public class ConfigForm {
         searchFilesRadioButton.setSelected(true);
         break;
       case FILE:
-        searchFilesRadioButton.setSelected(true);
+        useFileRadioButton.setSelected(true);
         break;
       case BOTH:
         bothRadioButton.setSelected(true);
