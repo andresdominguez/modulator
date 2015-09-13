@@ -8,6 +8,9 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class ModulatorConfigurable implements Configurable {
+
+  private ConfigForm view;
+
   @Nls
   @Override
   public String getDisplayName() {
@@ -23,7 +26,12 @@ public class ModulatorConfigurable implements Configurable {
   @Nullable
   @Override
   public JComponent createComponent() {
-    return null;
+    if (view == null) {
+      view = new ConfigForm();
+    }
+
+    return view.getMainPanel();
+
   }
 
   @Override
