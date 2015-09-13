@@ -20,11 +20,11 @@ public class ParamsCompletionProvider extends CompletionProvider<CompletionParam
                                 @NotNull CompletionResultSet completionResultSet) {
 
     PsiElement originalPosition = completionParameters.getOriginalPosition();
-    if (!isFunctionParamList(originalPosition)) {
+    if (originalPosition == null || !isFunctionParamList(originalPosition)) {
       return;
     }
 
-    ServiceFinder serviceFinder = new ServiceFinder();
+    ServiceFinder serviceFinder = new ServiceFinder(originalPosition.getProject());
     Iterable<String> services = serviceFinder.findServices();
 
     completionResultSet.addAllElements(getCompletions(services));
