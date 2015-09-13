@@ -47,4 +47,20 @@ public class ConfigForm {
     return completionStrategy;
   }
 
+  public String getFilePath() {
+    return pathText.getText();
+  }
+
+  public void setFilePath(String path) {
+    pathText.setText(path);
+  }
+
+  public String getExtraCompletTokens() {
+    return extraCompleteTextArea.getText();
+  }
+
+  public void setExtraCompletTokens(String tokens) {
+    this.extraCompleteTextArea.setText(tokens);
+  }
+
 }
