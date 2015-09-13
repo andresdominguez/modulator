@@ -17,7 +17,7 @@ public class ModulatorSettings {
     private final String property;
     private final String defaultValue;
 
-    private Property(String property, String defaultValue) {
+    Property(String property, String defaultValue) {
       this.property = property;
       this.defaultValue = defaultValue;
     }
