@@ -9,7 +9,12 @@ import javax.swing.*;
 
 public class ModulatorConfigurable implements Configurable {
 
+  private final ModulatorSettings settings;
   private ConfigForm view;
+
+  public ModulatorConfigurable() {
+    settings = new ModulatorSettings();
+  }
 
   @Nls
   @Override
@@ -36,7 +41,9 @@ public class ModulatorConfigurable implements Configurable {
 
   @Override
   public boolean isModified() {
-    return false;
+    return view.getCompletionStrategy() != settings.getStrategy() ||
+        !view.getFilePath().equals(settings.getFilePath()) ||
+        !view.getCompleteTokens().equals(settings.getCompleteTokens());
   }
 
   @Override
@@ -46,11 +53,15 @@ public class ModulatorConfigurable implements Configurable {
 
   @Override
   public void reset() {
+    settings.load();
 
+    view.setCompletionStrategy(settings.getStrategy());
+    view.setFilePath(settings.getFilePath());
+    view.setCompleteTokens(settings.getCompleteTokens());
   }
 
   @Override
   public void disposeUIResources() {
-
+    this.view = null;
   }
 }

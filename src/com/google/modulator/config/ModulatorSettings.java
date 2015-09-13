@@ -38,7 +38,7 @@ public class ModulatorSettings {
     load();
   }
 
-  private void load() {
+  void load() {
     strategy = CompletionStrategy.valueOf(getValue(Property.Strategy));
     filePath = getValue(Property.FilePath);
     completeTokens = getValue(Property.CompleteTokens);
