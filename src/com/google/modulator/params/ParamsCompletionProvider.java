@@ -20,13 +20,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.google.modulator.CompletionHelper.addCompletionsFromStringList;
-import static com.google.modulator.config.CompletionStrategy.BOTH;
 import static com.google.modulator.config.CompletionStrategy.FILE;
 import static com.google.modulator.config.CompletionStrategy.SEARCH;
 
 class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
 
-  public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+  private static final String LINE_SEPARATOR = System.getProperty("line.separator");
   private final ModulatorSettings settings;
 
   public ParamsCompletionProvider() {
