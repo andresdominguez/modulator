@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class ServiceFinder {
+class ServiceFinder {
 
-  public static final String SERVICE_PATTERN = ".service(";
+  private static final String SERVICE_PATTERN = ".service(";
   private final ProjectFileIndex fileIndex;
   private final FileDocumentManager documentManager;
 

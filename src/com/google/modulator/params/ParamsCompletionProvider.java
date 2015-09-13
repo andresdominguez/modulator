@@ -1,10 +1,8 @@
 package com.google.modulator.params;
 
-import com.google.modulator.CompletionHelper;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.javascript.psi.JSFunctionExpression;
 import com.intellij.lang.javascript.psi.JSParameterList;
 import com.intellij.psi.PsiElement;
@@ -13,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.google.modulator.CompletionHelper.getCompletions;
 
-public class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
+class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
   protected void addCompletions(@NotNull CompletionParameters completionParameters,
                                 ProcessingContext processingContext,
