@@ -48,7 +48,11 @@ public class ModulatorConfigurable implements Configurable {
 
   @Override
   public void apply() throws ConfigurationException {
+    settings.setStrategy(view.getCompletionStrategy());
+    settings.setFilePath(view.getFilePath());
+    settings.setCompleteTokens(view.getCompleteTokens());
 
+    settings.save();
   }
 
   @Override

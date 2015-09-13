@@ -44,7 +44,7 @@ public class ModulatorSettings {
     completeTokens = getValue(Property.CompleteTokens);
   }
 
-  private void save() {
+  void save() {
     setValue(Property.Strategy, strategy.name());
     setValue(Property.FilePath, filePath);
     setValue(Property.CompleteTokens, completeTokens);
