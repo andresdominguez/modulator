@@ -12,6 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class CompletionHelper {
 
+  public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
   public static void addCompletionsFromStringList(
       @NotNull CompletionResultSet completionResultSet,
       Iterable<String> completions) {
