@@ -36,7 +36,7 @@ class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> 
       return;
     }
 
-    ContributorHelper.findModulesAndCompletions(completionResultSet, originalPosition.getProject());
+    ContributorHelper.addModulesToCompleteList(completionResultSet, originalPosition.getProject());
   }
 
   @NotNull

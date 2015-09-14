@@ -10,7 +10,7 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 public class ContributorHelper {
-  public static void findModulesAndCompletions(@NotNull CompletionResultSet completionResultSet, Project project) {
+  public static void addModulesToCompleteList(@NotNull CompletionResultSet completionResultSet, Project project) {
     Finder<ModuleResult> moduleFinder = new Finder<ModuleResult>(project, new ModuleVisitor());
     for (ModuleResult moduleResult : moduleFinder.find()) {
       LookupElement lookupElement = CompletionHelper.newBuilder(moduleResult.name)

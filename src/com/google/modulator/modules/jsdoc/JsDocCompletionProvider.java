@@ -29,7 +29,7 @@ public class JsDocCompletionProvider extends CompletionProvider<CompletionParame
     }
 
     // Get all the modules
-    ContributorHelper.findModulesAndCompletions(completionResultSet, originalPosition.getProject());
+    ContributorHelper.addModulesToCompleteList(completionResultSet, originalPosition.getProject());
 
     // Add extra tokens
     CompletionHelper.addCompletionsFromStringList(completionResultSet, readExtraTokens());
