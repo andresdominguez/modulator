@@ -9,8 +9,8 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-class ContributorHelper {
-  static void findModulesAndCompletions(@NotNull CompletionResultSet completionResultSet, Project project) {
+public class ContributorHelper {
+  public static void findModulesAndCompletions(@NotNull CompletionResultSet completionResultSet, Project project) {
     Finder<ModuleResult> moduleFinder = new Finder<ModuleResult>(project, new ModuleVisitor());
     for (ModuleResult moduleResult : moduleFinder.find()) {
       LookupElement lookupElement = CompletionHelper.newBuilder(moduleResult.name)

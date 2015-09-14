@@ -21,9 +21,9 @@
   <depends>JavaScript</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <completion.contributor implementationClass="com.google.modulator.modules.ModuleContributor" language="any" order="FIRST" />
+    <completion.contributor implementationClass="com.google.modulator.modules.require.ModuleContributor" language="any" order="FIRST" />
     <completion.contributor implementationClass="com.google.modulator.params.ParamsContributor" language="any" order="FIRST" />
-    <completion.contributor implementationClass="com.google.modulator.modules.JsDocContributor" language="any" order="FIRST" />
+    <completion.contributor implementationClass="com.google.modulator.modules.jsdoc.JsDocContributor" language="any" order="FIRST" />
 
     <applicationConfigurable instance="com.google.modulator.config.ModulatorConfigurable"/>
   </extensions>
