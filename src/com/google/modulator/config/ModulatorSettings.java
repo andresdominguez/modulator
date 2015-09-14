@@ -6,13 +6,15 @@ public class ModulatorSettings {
 
   private CompletionStrategy strategy;
   private String filePath;
-  private String completeTokens;
+  private String completeServiceTokens;
+  private String completeJsDocTokens;
 
   public enum Property {
 
     Strategy("com.google.modulator.completionStrategy", CompletionStrategy.SEARCH.name()),
     FilePath("com.google.modulator.filePath", ""),
-    CompleteTokens("com.google.modulator.autoCompleteTokens", "");
+    CompleteServiceTokens("com.google.modulator.autoCompleteServiceTokens", ""),
+    CompleteJsDocTokens("com.google.modulator.autoCompleteJsDocTokens", "");
 
     private final String property;
     private final String defaultValue;
@@ -41,13 +43,15 @@ public class ModulatorSettings {
   void load() {
     strategy = CompletionStrategy.valueOf(getValue(Property.Strategy));
     filePath = getValue(Property.FilePath);
-    completeTokens = getValue(Property.CompleteTokens);
+    completeServiceTokens = getValue(Property.CompleteServiceTokens);
+    completeJsDocTokens = getValue(Property.CompleteJsDocTokens);
   }
 
   void save() {
     setValue(Property.Strategy, strategy.name());
     setValue(Property.FilePath, filePath);
-    setValue(Property.CompleteTokens, completeTokens);
+    setValue(Property.CompleteServiceTokens, completeServiceTokens);
+    setValue(Property.CompleteJsDocTokens, completeJsDocTokens);
   }
 
   private String getValue(Property property) {
@@ -75,11 +79,19 @@ public class ModulatorSettings {
     this.filePath = filePath;
   }
 
-  public String getCompleteTokens() {
-    return completeTokens;
+  public String getCompleteServiceTokens() {
+    return completeServiceTokens;
   }
 
-  public void setCompleteTokens(String completeTokens) {
-    this.completeTokens = completeTokens;
+  public void setCompleteServiceTokens(String completeTokens) {
+    this.completeServiceTokens = completeTokens;
+  }
+
+  public String getCompleteJsDocTokens() {
+    return completeJsDocTokens;
+  }
+
+  public void setCompleteJsDocTokens(String completeJsDocTokens) {
+    this.completeJsDocTokens = completeJsDocTokens;
   }
 }

@@ -46,14 +46,16 @@ public class ModulatorConfigurable implements Configurable {
   public boolean isModified() {
     return view.getCompletionStrategy() != settings.getStrategy() ||
         !view.getFilePath().equals(settings.getFilePath()) ||
-        !view.getCompleteTokens().equals(settings.getCompleteTokens());
+        !view.getCompleteServiceTokens().equals(settings.getCompleteServiceTokens()) ||
+        !view.getCompleteJsDoc().equals(settings.getCompleteJsDocTokens());
   }
 
   @Override
   public void apply() throws ConfigurationException {
     settings.setStrategy(view.getCompletionStrategy());
     settings.setFilePath(view.getFilePath());
-    settings.setCompleteTokens(view.getCompleteTokens());
+    settings.setCompleteServiceTokens(view.getCompleteServiceTokens());
+    settings.setCompleteJsDocTokens(view.getCompleteJsDoc());
 
     settings.save();
   }
@@ -64,7 +66,8 @@ public class ModulatorConfigurable implements Configurable {
 
     view.setCompletionStrategy(settings.getStrategy());
     view.setFilePath(settings.getFilePath());
-    view.setCompleteTokens(settings.getCompleteTokens());
+    view.setCompleteServiceTokens(settings.getCompleteServiceTokens());
+    view.setCompleteJsDoc(settings.getCompleteJsDocTokens());
   }
 
   @Override

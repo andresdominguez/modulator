@@ -10,8 +10,9 @@ public class ConfigForm {
   private JRadioButton bothRadioButton;
   private JPanel filePanel;
   private JTextField pathText;
-  private JTextArea completeTokensTextArea;
+  private JTextArea completeServicesTextArea;
   private JPanel mainPanel;
+  private JTextArea completeJsDocTextarea;
 
   private CompletionStrategy completionStrategy;
 
@@ -66,12 +67,19 @@ public class ConfigForm {
     pathText.setText(path);
   }
 
-  public String getCompleteTokens() {
-    return completeTokensTextArea.getText();
+  public String getCompleteServiceTokens() {
+    return completeServicesTextArea.getText();
   }
 
-  public void setCompleteTokens(String tokens) {
-    this.completeTokensTextArea.setText(tokens);
+  public void setCompleteServiceTokens(String tokens) {
+    this.completeServicesTextArea.setText(tokens);
   }
 
+  public String getCompleteJsDoc() {
+    return this.completeJsDocTextarea.getText();
+  }
+
+  public void setCompleteJsDoc(String text) {
+    completeJsDocTextarea.setText(text);
+  }
 }

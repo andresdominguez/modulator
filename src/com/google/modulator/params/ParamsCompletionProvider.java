@@ -90,6 +90,6 @@ class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> 
 
   @NotNull
   private List<String> readExtraTokens() {
-    return Arrays.asList(settings.getCompleteTokens().split(LINE_SEPARATOR));
+    return Arrays.asList(settings.getCompleteServiceTokens().split(LINE_SEPARATOR));
   }
 }
