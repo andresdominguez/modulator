@@ -1,7 +1,6 @@
-package com.google.modulator.jsdoc;
+package com.google.modulator.modules;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.lang.javascript.JavascriptLanguage;
 import com.intellij.lang.javascript.psi.jsdoc.JSDocTagValue;
@@ -17,7 +16,7 @@ public class JsDocContributor extends CompletionContributor {
             .withParent(PlatformPatterns.psiElement(JSDocTagValue.class))
             .withLanguage(JavascriptLanguage.INSTANCE);
 
-    CompletionProvider completionProvider = new JsDocCompletionProvider();
+    JsDocCompletionProvider completionProvider = new JsDocCompletionProvider();
 
     extend(CompletionType.BASIC, pattern, completionProvider);
   }
