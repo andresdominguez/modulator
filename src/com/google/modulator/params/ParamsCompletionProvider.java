@@ -1,5 +1,6 @@
 package com.google.modulator.params;
 
+import com.google.modulator.CompletionHelper;
 import com.google.modulator.Finder;
 import com.google.modulator.config.CompletionStrategy;
 import com.google.modulator.config.ModulatorSettings;
@@ -25,12 +26,7 @@ import static com.google.modulator.config.CompletionStrategy.SEARCH;
 
 class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> {
 
-  private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-  private final ModulatorSettings settings;
-
-  public ParamsCompletionProvider() {
-    settings = new ModulatorSettings();
-  }
+  private final ModulatorSettings settings = new ModulatorSettings();
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters completionParameters,
@@ -90,6 +86,6 @@ class ParamsCompletionProvider extends CompletionProvider<CompletionParameters> 
 
   @NotNull
   private List<String> readExtraTokens() {
-    return Arrays.asList(settings.getCompleteServiceTokens().split(LINE_SEPARATOR));
+    return Arrays.asList(settings.getCompleteServiceTokens().split(CompletionHelper.LINE_SEPARATOR));
   }
 }
