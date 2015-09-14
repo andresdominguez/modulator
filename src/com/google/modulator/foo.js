@@ -2,9 +2,9 @@ goog.require('')
 
 var Hello = goog.defineClass(null, {
   /**
-   *
+   * @param {boolean} foo
    */
-  constructor: function () {
+  constructor: function (foo) {
   }
 });
 
