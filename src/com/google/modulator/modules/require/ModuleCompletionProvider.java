@@ -1,7 +1,5 @@
 package com.google.modulator.modules.require;
 
-import com.google.modulator.CompletionHelper;
-import com.google.modulator.config.ModulatorSettings;
 import com.google.modulator.modules.ContributorHelper;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
@@ -10,16 +8,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.List;
-
 class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> {
-
-  private final ModulatorSettings settings;
-
-  ModuleCompletionProvider() {
-    settings = new ModulatorSettings();
-  }
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters completionParameters,
@@ -37,10 +26,5 @@ class ModuleCompletionProvider extends CompletionProvider<CompletionParameters> 
     }
 
     ContributorHelper.addModulesToCompleteList(completionResultSet, originalPosition.getProject());
-  }
-
-  @NotNull
-  private List<String> readExtraTokens() {
-    return Arrays.asList(settings.getCompleteServiceTokens().split(CompletionHelper.LINE_SEPARATOR));
   }
 }
