@@ -10,8 +10,6 @@ import com.intellij.psi.PsiElement;
 
 public class ModuleContributor extends CompletionContributor {
   public ModuleContributor() {
-    super();
-
     PsiElementPattern.Capture<PsiElement> pattern =
         PlatformPatterns.psiElement()
             .withParent(PlatformPatterns.psiElement(JSLiteralExpression.class))
